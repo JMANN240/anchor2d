@@ -15,6 +15,13 @@ impl Anchor2D {
         self.vertical
     }
 
+    pub fn get_offset(&self, rect: Rect) -> DVec2 {
+        dvec2(
+            self.get_horizontal().get_offset(rect.get_range_x()),
+            self.get_vertical().get_offset(rect.get_range_y()),
+        )
+    }
+
     pub fn anchor(&self, rect: Rect) -> DVec2 {
         dvec2(
             self.get_horizontal().anchor(rect.get_range_x()),
@@ -23,15 +30,15 @@ impl Anchor2D {
     }
 }
 
-fn anchor(range: Range, t: f64) -> f64 {
-    range.get_start() + 0.0f64.lerp(range.get_size(), t)
-}
-
 trait Anchor {
     fn get_t(&self) -> f64;
 
+    fn get_offset(&self, range: Range) -> f64 {
+        0.0f64.lerp(range.get_size(), self.get_t())
+    }
+
     fn anchor(&self, range: Range) -> f64 {
-        anchor(range, self.get_t())
+        range.get_start() + self.get_offset(range)
     }
 }
 
