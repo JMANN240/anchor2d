@@ -124,6 +124,10 @@ impl Range {
     pub fn get_size(&self) -> f64 {
         self.size
     }
+
+    pub fn get_end(&self) -> f64 {
+        self.get_start() + self.get_size()
+    }
 }
 
 #[derive(Debug, Clone, Copy)]
