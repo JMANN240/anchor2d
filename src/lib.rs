@@ -151,6 +151,22 @@ impl Rect {
     pub fn get_range_y(&self) -> Range {
         self.range_y
     }
+
+    pub fn get_x(&self) -> f64 {
+        self.get_range_x().get_start()
+    }
+
+    pub fn get_width(&self) -> f64 {
+        self.get_range_x().get_size()
+    }
+
+    pub fn get_y(&self) -> f64 {
+        self.get_range_y().get_start()
+    }
+
+    pub fn get_height(&self) -> f64 {
+        self.get_range_y().get_size()
+    }
 }
 
 #[cfg(test)]
@@ -173,7 +189,7 @@ mod test {
     }
 
     #[test]
-    fn test_vertical() {
+    fn test_vertical_graphics() {
         let range = Range::new(0.0, 100.0);
 
         assert_eq!(
@@ -224,6 +240,61 @@ mod test {
             )
             .anchor(range),
             100.0
+        );
+    }
+
+    #[test]
+    fn test_vertical_math() {
+        let range = Range::new(0.0, 100.0);
+
+        assert_eq!(
+            VerticalAnchor::new(
+                VerticalAnchorContext::Math,
+                VerticalAnchorValue::Top,
+            )
+            .get_t(),
+            1.0
+        );
+        assert_eq!(
+            VerticalAnchor::new(
+                VerticalAnchorContext::Math,
+                VerticalAnchorValue::Center,
+            )
+            .get_t(),
+            0.5
+        );
+        assert_eq!(
+            VerticalAnchor::new(
+                VerticalAnchorContext::Math,
+                VerticalAnchorValue::Bottom,
+            )
+            .get_t(),
+            0.0
+        );
+
+        assert_eq!(
+            VerticalAnchor::new(
+                VerticalAnchorContext::Math,
+                VerticalAnchorValue::Top,
+            )
+            .anchor(range),
+            100.0
+        );
+        assert_eq!(
+            VerticalAnchor::new(
+                VerticalAnchorContext::Math,
+                VerticalAnchorValue::Center,
+            )
+            .anchor(range),
+            50.0
+        );
+        assert_eq!(
+            VerticalAnchor::new(
+                VerticalAnchorContext::Math,
+                VerticalAnchorValue::Bottom,
+            )
+            .anchor(range),
+            0.0
         );
     }
 }
