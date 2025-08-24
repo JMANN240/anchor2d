@@ -7,6 +7,13 @@ pub struct Anchor2D {
 }
 
 impl Anchor2D {
+    pub fn new(horizontal: HorizontalAnchor, vertical: VerticalAnchor) -> Self {
+        Self {
+            horizontal,
+            vertical,
+        }
+    }
+
     pub fn get_horizontal(&self) -> HorizontalAnchor {
         self.horizontal
     }
@@ -179,7 +186,7 @@ impl Rect {
 #[cfg(test)]
 mod test {
     use crate::{
-        Anchor, HorizontalAnchor, Range, VerticalAnchor, VerticalAnchorContext, VerticalAnchorValue
+        Anchor, HorizontalAnchor, Range, VerticalAnchor, VerticalAnchorContext, VerticalAnchorValue,
     };
 
     #[test]
@@ -200,52 +207,33 @@ mod test {
         let range = Range::new(0.0, 100.0);
 
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Graphics,
-                VerticalAnchorValue::Top,
-            )
-            .get_t(),
+            VerticalAnchor::new(VerticalAnchorContext::Graphics, VerticalAnchorValue::Top,).get_t(),
             0.0
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Graphics,
-                VerticalAnchorValue::Center,
-            )
-            .get_t(),
+            VerticalAnchor::new(VerticalAnchorContext::Graphics, VerticalAnchorValue::Center,)
+                .get_t(),
             0.5
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Graphics,
-                VerticalAnchorValue::Bottom,
-            )
-            .get_t(),
+            VerticalAnchor::new(VerticalAnchorContext::Graphics, VerticalAnchorValue::Bottom,)
+                .get_t(),
             1.0
         );
 
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Graphics,
-                VerticalAnchorValue::Top,
-            )
-            .anchor(range),
+            VerticalAnchor::new(VerticalAnchorContext::Graphics, VerticalAnchorValue::Top,)
+                .anchor(range),
             0.0
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Graphics,
-                VerticalAnchorValue::Center,
-            )
-            .anchor(range),
+            VerticalAnchor::new(VerticalAnchorContext::Graphics, VerticalAnchorValue::Center,)
+                .anchor(range),
             50.0
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Graphics,
-                VerticalAnchorValue::Bottom,
-            )
-            .anchor(range),
+            VerticalAnchor::new(VerticalAnchorContext::Graphics, VerticalAnchorValue::Bottom,)
+                .anchor(range),
             100.0
         );
     }
@@ -255,52 +243,31 @@ mod test {
         let range = Range::new(0.0, 100.0);
 
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Math,
-                VerticalAnchorValue::Top,
-            )
-            .get_t(),
+            VerticalAnchor::new(VerticalAnchorContext::Math, VerticalAnchorValue::Top,).get_t(),
             1.0
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Math,
-                VerticalAnchorValue::Center,
-            )
-            .get_t(),
+            VerticalAnchor::new(VerticalAnchorContext::Math, VerticalAnchorValue::Center,).get_t(),
             0.5
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Math,
-                VerticalAnchorValue::Bottom,
-            )
-            .get_t(),
+            VerticalAnchor::new(VerticalAnchorContext::Math, VerticalAnchorValue::Bottom,).get_t(),
             0.0
         );
 
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Math,
-                VerticalAnchorValue::Top,
-            )
-            .anchor(range),
+            VerticalAnchor::new(VerticalAnchorContext::Math, VerticalAnchorValue::Top,)
+                .anchor(range),
             100.0
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Math,
-                VerticalAnchorValue::Center,
-            )
-            .anchor(range),
+            VerticalAnchor::new(VerticalAnchorContext::Math, VerticalAnchorValue::Center,)
+                .anchor(range),
             50.0
         );
         assert_eq!(
-            VerticalAnchor::new(
-                VerticalAnchorContext::Math,
-                VerticalAnchorValue::Bottom,
-            )
-            .anchor(range),
+            VerticalAnchor::new(VerticalAnchorContext::Math, VerticalAnchorValue::Bottom,)
+                .anchor(range),
             0.0
         );
     }
